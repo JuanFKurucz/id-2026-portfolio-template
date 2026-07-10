@@ -1,0 +1,37 @@
+site_name: "Portafolio Ingeniería de Datos"
+theme:
+  name: material
+  language: es
+  features:
+    - navigation.sections
+    - navigation.indexes
+plugins:
+  - search
+  - awesome-pages
+  - glightbox
+nav:
+  - Inicio: index.md
+  - "Onboarding primera semana": onboarding-primera-semana.md
+  - "Acerca de mí": acerca.md
+  - Portafolio:
+    - portfolio/index.md
+    - "Mapa de evidencias": portfolio/mapa-evidencias.md
+    - "Primera entrada": portfolio/01-primera-entrada.md
+    - Plantilla: portfolio/plantilla.md
+  - "Política AI-safe": politica-uso-ia.md
+  - "Plantilla de entrega": plantillas/entrega-ai-safe.md
+  - "Evidencia y defensa": plantillas/evidencia-defensa-portfolio.md
+  - Recursos: recursos.md
+markdown_extensions:
+  - admonition
+  - attr_list
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.emoji
+  - pymdownx.tasklist:
+      custom_checkbox: true
