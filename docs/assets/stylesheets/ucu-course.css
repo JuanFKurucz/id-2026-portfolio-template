@@ -1,0 +1,12 @@
+:root {
+  --ucu-accent: #0b6e69;
+  --ucu-accent-strong: #07534f;
+  --ucu-accent-soft: #d8eeea;
+  --ucu-highlight: #a85f08;
+  --ucu-highlight-soft: #f7e5c9;
+}
+
+[data-md-color-scheme="slate"] {
+  --ucu-accent-soft: #153d3b;
+  --ucu-highlight-soft: #4b3215;
+}

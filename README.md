@@ -38,3 +38,14 @@ mkdocs build --strict
 - historiales completos de chat con información sensible;
 - datasets privados, dumps pesados o credenciales de nube sin permiso;
 - contenido generado por IA sin declaración y verificación manual.
+
+## Validación formativa
+
+Cada push ejecuta **Calidad del portafolio**:
+
+- valida los estados del [mapa de evidencias](docs/portfolio/mapa-evidencias.md);
+- comprueba que una fila en `Mínimo`, `Defendible` o `Revisado` tenga su entrada y las secciones esenciales;
+- detecta enlaces locales rotos y posibles secretos;
+- construye MkDocs en modo estricto.
+
+Los errores bloquean la publicación por seguridad o estructura. Las advertencias orientan mejoras, pero no sustituyen la devolución docente. El workflow no ejecuta notebooks ni código del estudiante. Cuando la calidad pasa en `main`, Pages publica el sitio automáticamente.

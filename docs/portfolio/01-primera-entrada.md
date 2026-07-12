@@ -5,7 +5,7 @@ date: 2026-07-01
 
 # Arranque y primera evidencia
 
-## Resumen
+## Objetivo
 
 - **Clase o práctica:** Clase 1 - arranque del curso.
 - **Objetivo:** dejar listo el portafolio personal y demostrar que sé dónde va la evidencia del curso.
