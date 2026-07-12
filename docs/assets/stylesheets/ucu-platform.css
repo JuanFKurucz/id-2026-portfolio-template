@@ -28,7 +28,7 @@
   --ucu-focus: #005fcc;
   --ucu-shadow: 0 1rem 3rem rgb(18 33 47 / 10%);
   --md-text-font: "Atkinson Hyperlegible Next", "Segoe UI", sans-serif;
-  --md-code-font: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  --md-code-font: "Cascadia Code", "SFMono-Regular", consolas, monospace;
   --md-primary-fg-color: var(--ucu-accent);
   --md-primary-fg-color--dark: var(--ucu-accent-strong);
   --md-accent-fg-color: var(--ucu-highlight);
@@ -234,6 +234,17 @@ input {
   margin: 0.45rem 0;
 }
 
+.ucu-route-card h3 {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  margin: 0.45rem 0;
+}
+
+.ucu-route-card h3 a {
+  color: var(--ucu-accent-strong);
+}
+
 .ucu-route-card p {
   color: var(--ucu-muted);
   margin: 0;
@@ -250,13 +261,21 @@ input {
   padding: 1.2rem 1.35rem;
 }
 
-.ucu-practice-brief h2,
-.ucu-practice-brief h3 {
+.ucu-practice-brief__title,
+.ucu-practice-brief__deliverables-title {
   margin: 0;
 }
 
-.ucu-practice-brief h2 {
+.ucu-practice-brief__title {
+  color: var(--ucu-ink);
+  font-family: "Source Serif 4", Georgia, serif;
   font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.ucu-practice-brief__deliverables-title {
+  font-weight: 750;
 }
 
 .ucu-practice-brief__facts {

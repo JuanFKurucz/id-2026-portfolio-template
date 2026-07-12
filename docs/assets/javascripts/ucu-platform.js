@@ -8,6 +8,10 @@
     return statuses.find((status) => status.toLocaleLowerCase("es") === compact) || null;
   }
 
+  function statusSlug(value) {
+    return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("es");
+  }
+
   function enhanceProgress() {
     const dashboard = document.querySelector("[data-ucu-progress-dashboard]");
     const table = document.querySelector("[data-ucu-progress-source] table");
@@ -43,9 +47,13 @@
     grid.setAttribute("role", "list");
     statuses.forEach((status) => {
       const item = document.createElement("div");
-      item.className = `ucu-progress-stat ucu-progress-stat--${status.toLocaleLowerCase("es")}`;
+      item.className = `ucu-progress-stat ucu-progress-stat--${statusSlug(status)}`;
       item.setAttribute("role", "listitem");
-      item.innerHTML = `<strong>${counts[status]}</strong><span>${status}</span>`;
+      const count = document.createElement("strong");
+      count.textContent = String(counts[status]);
+      const label = document.createElement("span");
+      label.textContent = status;
+      item.replaceChildren(count, label);
       grid.appendChild(item);
     });
 

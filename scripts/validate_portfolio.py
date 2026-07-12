@@ -60,11 +60,13 @@ class ProgressRow:
 
 
 def _normalise_status(value: str) -> str | None:
+    """Return the canonical Spanish status matching a table cell."""
     compact = " ".join(value.replace("`", "").split()).casefold()
     return next((status for status in ALLOWED_STATUSES if status.casefold() == compact), None)
 
 
 def parse_progress_map(path: Path) -> tuple[list[ProgressRow], list[Issue]]:
+    """Parse the evidence map and report structural or status errors."""
     issues: list[Issue] = []
     rows: list[ProgressRow] = []
     if not path.exists():
@@ -92,6 +94,7 @@ def parse_progress_map(path: Path) -> tuple[list[ProgressRow], list[Issue]]:
 
 
 def validate_entry(path: Path) -> list[Issue]:
+    """Validate the sections and placeholders of one started evidence entry."""
     if not path.exists():
         return [Issue("error", f"La evidencia marcada no existe: {path.as_posix()}")]
     text = path.read_text(encoding="utf-8")
@@ -105,6 +108,7 @@ def validate_entry(path: Path) -> list[Issue]:
 
 
 def validate_local_links(root: Path) -> list[Issue]:
+    """Report unresolved relative Markdown links in public documentation."""
     issues: list[Issue] = []
     for path in sorted((root / "docs").rglob("*.md")):
         text = path.read_text(encoding="utf-8")
@@ -121,13 +125,16 @@ def validate_local_links(root: Path) -> list[Issue]:
 
 
 def scan_secrets(root: Path) -> list[Issue]:
+    """Scan likely text and configuration files for credential patterns."""
     issues: list[Issue] = []
     skip_parts = {".git", ".venv", "venv", "site", "__pycache__"}
     text_suffixes = {".md", ".yml", ".yaml", ".json", ".py", ".txt", ".toml", ".ini"}
+    secret_names = {".npmrc", ".pypirc", "credentials", "id_dsa", "id_ecdsa", "id_ed25519", "id_rsa"}
     for path in sorted(root.rglob("*")):
         if not path.is_file() or any(part in skip_parts for part in path.parts):
             continue
-        if path.suffix.lower() not in text_suffixes:
+        name = path.name.lower()
+        if path.suffix.lower() not in text_suffixes and name not in secret_names and not name.startswith(".env"):
             continue
         text = path.read_text(encoding="utf-8", errors="ignore")
         for label, pattern in SECRET_PATTERNS.items():
@@ -137,6 +144,7 @@ def scan_secrets(root: Path) -> list[Issue]:
 
 
 def validate(root: Path) -> list[Issue]:
+    """Run every portfolio validation rule for a repository root."""
     issues: list[Issue] = []
     for relative in ESSENTIAL_FILES:
         if not (root / relative).exists():
@@ -157,6 +165,7 @@ def validate(root: Path) -> list[Issue]:
 
 
 def render_summary(issues: list[Issue]) -> str:
+    """Render errors and warnings as a GitHub-friendly Markdown summary."""
     errors = [issue for issue in issues if issue.severity == "error"]
     warnings = [issue for issue in issues if issue.severity == "warning"]
     lines = ["# Calidad del portafolio", "", f"- Errores: **{len(errors)}**", f"- Advertencias: **{len(warnings)}**"]
@@ -170,6 +179,7 @@ def render_summary(issues: list[Issue]) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
+    """Validate the selected root and return a blocking exit code on errors."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path.cwd())
     args = parser.parse_args(argv)

@@ -10,22 +10,28 @@ date: 2026-07-11
 
 <p class="ucu-hero__lede">Este repositorio sí se edita. Acá reunís evidencia seleccionada, reproducible y defendible de Ingeniería de Datos.</p>
 </div>
-<div class="ucu-route-grid">
-  <a class="ucu-route-card" href="onboarding-primera-semana/">
-    <span class="ucu-route-card__step">Ruta 01</span>
-    <strong>Empezar el portafolio</strong>
-    <p>Configurá el sitio y completá tu primera evidencia.</p>
-  </a>
-  <a class="ucu-route-card" href="portfolio/mapa-evidencias/">
-    <span class="ucu-route-card__step">Ruta 02</span>
-    <strong>Actualizar el progreso</strong>
-    <p>Marcá estados en Markdown y guardalos en el historial Git.</p>
-  </a>
-  <a class="ucu-route-card" href="plantillas/evidencia-defensa-portfolio/">
-    <span class="ucu-route-card__step">Ruta 03</span>
-    <strong>Preparar la defensa</strong>
-    <p>Elegí evidencia fuerte, reproducila y ensayá una variación.</p>
-  </a>
+<div class="ucu-route-grid" markdown="1">
+<div class="ucu-route-card" markdown="1">
+<span class="ucu-route-card__step">Ruta 01</span>
+
+### [Empezar el portafolio](onboarding-primera-semana.md)
+
+Configurá el sitio y completá tu primera evidencia.
+</div>
+<div class="ucu-route-card" markdown="1">
+<span class="ucu-route-card__step">Ruta 02</span>
+
+### [Actualizar el progreso](portfolio/mapa-evidencias.md)
+
+Marcá estados en Markdown y guardalos en el historial Git.
+</div>
+<div class="ucu-route-card" markdown="1">
+<span class="ucu-route-card__step">Ruta 03</span>
+
+### [Preparar la defensa](plantillas/evidencia-defensa-portfolio.md)
+
+Elegí evidencia fuerte, reproducila y ensayá una variación.
+</div>
 </div>
 
 ## Primeros 30 minutos
