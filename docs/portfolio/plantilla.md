@@ -7,7 +7,7 @@ date: 2026-07-01
 
 Copiá esta página para cada evidencia importante. La entrada no tiene que ser larga; tiene que ser defendible.
 
-## Resumen
+## Objetivo
 
 - **Clase o práctica:** indicá la consigna o clase relacionada.
 - **Objetivo:** qué querías demostrar.

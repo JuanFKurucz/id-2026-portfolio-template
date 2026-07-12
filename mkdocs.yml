@@ -1,30 +1,42 @@
 site_name: "Portafolio Ingeniería de Datos"
 theme:
   name: material
+  custom_dir: overrides
   language: es
+  font: false
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Usar modo oscuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Usar modo claro
   features:
     - navigation.sections
     - navigation.indexes
+    - navigation.top
+    - content.code.copy
+extra:
+  platform:
+    course: id
+    surface: portfolio
+extra_css:
+  - assets/stylesheets/ucu-platform.css
+  - assets/stylesheets/ucu-course.css
+extra_javascript:
+  - assets/javascripts/ucu-platform.js
 plugins:
   - search
   - awesome-pages
   - glightbox
-nav:
-  - Inicio: index.md
-  - "Onboarding primera semana": onboarding-primera-semana.md
-  - "Acerca de mí": acerca.md
-  - Portafolio:
-    - portfolio/index.md
-    - "Mapa de evidencias": portfolio/mapa-evidencias.md
-    - "Primera entrada": portfolio/01-primera-entrada.md
-    - Plantilla: portfolio/plantilla.md
-  - "Política AI-safe": politica-uso-ia.md
-  - "Plantilla de entrega": plantillas/entrega-ai-safe.md
-  - "Evidencia y defensa": plantillas/evidencia-defensa-portfolio.md
-  - Recursos: recursos.md
 markdown_extensions:
   - admonition
   - attr_list
+  - md_in_html
   - footnotes
   - tables
   - toc:

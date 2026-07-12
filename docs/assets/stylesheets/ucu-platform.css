@@ -1,0 +1,445 @@
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url("../fonts/atkinson-hyperlegible-next-latin-ext-wght-normal.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 900;
+  src: url("../fonts/source-serif-4-latin-ext-wght-normal.woff2") format("woff2-variations");
+}
+
+:root {
+  --ucu-ink: #12212f;
+  --ucu-paper: #f8f5ef;
+  --ucu-paper-raised: #fffdf9;
+  --ucu-muted: #52616d;
+  --ucu-line: #d7d0c5;
+  --ucu-accent: #0b6e69;
+  --ucu-accent-strong: #07534f;
+  --ucu-accent-soft: #d8eeea;
+  --ucu-highlight: #b46b12;
+  --ucu-highlight-soft: #f7e5c9;
+  --ucu-focus: #005fcc;
+  --ucu-shadow: 0 1rem 3rem rgb(18 33 47 / 10%);
+  --md-text-font: "Atkinson Hyperlegible Next", "Segoe UI", sans-serif;
+  --md-code-font: "Cascadia Code", "SFMono-Regular", consolas, monospace;
+  --md-primary-fg-color: var(--ucu-accent);
+  --md-primary-fg-color--dark: var(--ucu-accent-strong);
+  --md-accent-fg-color: var(--ucu-highlight);
+}
+
+[data-md-color-scheme="default"] {
+  --md-default-bg-color: var(--ucu-paper);
+  --md-default-fg-color: var(--ucu-ink);
+  --md-default-fg-color--light: var(--ucu-muted);
+  --md-typeset-a-color: var(--ucu-accent-strong);
+}
+
+[data-md-color-scheme="slate"] {
+  --ucu-ink: #edf4f7;
+  --ucu-paper: #111a22;
+  --ucu-paper-raised: #18252f;
+  --ucu-muted: #b7c5cf;
+  --ucu-line: #344652;
+  --ucu-accent-soft: #153d3b;
+  --ucu-highlight-soft: #4b3215;
+  --ucu-shadow: 0 1.25rem 3rem rgb(0 0 0 / 25%);
+  --md-default-bg-color: var(--ucu-paper);
+  --md-default-fg-color: var(--ucu-ink);
+  --md-default-fg-color--light: var(--ucu-muted);
+  --md-typeset-a-color: #7fd4ca;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+input {
+  font-family: var(--md-text-font);
+}
+
+.md-header,
+.md-tabs {
+  background: var(--ucu-accent-strong);
+}
+
+.md-header__button.md-logo {
+  border-radius: 0.35rem;
+}
+
+.md-main__inner {
+  margin-top: 1.2rem;
+}
+
+.md-typeset {
+  font-size: 0.84rem;
+  line-height: 1.72;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.ucu-hero__title {
+  color: var(--ucu-ink);
+  font-family: "Source Serif 4", Georgia, serif;
+  font-variation-settings: "wght" 680;
+  letter-spacing: -0.025em;
+}
+
+.md-typeset h1 {
+  font-size: clamp(2.1rem, 5vw, 3.35rem);
+  line-height: 1.04;
+  margin-bottom: 1.25rem;
+}
+
+.md-typeset h2 {
+  margin-top: 2.4rem;
+}
+
+.md-typeset a {
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
+}
+
+:where(a, button, input, summary, [tabindex]):focus-visible {
+  border-radius: 0.2rem;
+  outline: 0.18rem solid var(--ucu-focus);
+  outline-offset: 0.18rem;
+}
+
+.md-nav__link,
+.md-header__button,
+.md-tabs__link {
+  min-height: 2.75rem;
+}
+
+.ucu-page-frame {
+  min-width: 0;
+  position: relative;
+}
+
+.ucu-hero,
+.ucu-route-grid,
+.ucu-route-card,
+.ucu-practice-brief,
+.ucu-progress-dashboard,
+.ucu-boundary-note {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.ucu-hero {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--ucu-accent-soft) 82%, transparent), transparent 72%),
+    repeating-linear-gradient(90deg, transparent 0 2.8rem, color-mix(in srgb, var(--ucu-line) 45%, transparent) 2.8rem calc(2.8rem + 1px)),
+    var(--ucu-paper-raised);
+  border: 1px solid var(--ucu-line);
+  border-radius: 0.6rem 2.2rem 0.6rem 0.6rem;
+  box-shadow: var(--ucu-shadow);
+  margin: 0 0 2rem;
+  overflow: hidden;
+  padding: clamp(1.4rem, 4vw, 3rem);
+  position: relative;
+}
+
+.ucu-hero::after {
+  background: var(--ucu-highlight);
+  content: "";
+  height: 0.36rem;
+  inset: 0 0 auto;
+  position: absolute;
+}
+
+.ucu-hero__eyebrow,
+.ucu-practice-brief__eyebrow {
+  color: var(--ucu-accent-strong);
+  font-size: 0.72rem;
+  font-weight: 760;
+  letter-spacing: 0.12em;
+  margin: 0 0 0.6rem;
+  text-transform: uppercase;
+}
+
+[data-md-color-scheme="slate"] .ucu-hero__eyebrow,
+[data-md-color-scheme="slate"] .ucu-practice-brief__eyebrow {
+  color: #8de0d5;
+}
+
+.ucu-hero__title {
+  font-size: clamp(2.15rem, 6vw, 4.2rem);
+  line-height: 0.98;
+  margin: 0;
+  max-width: 18ch;
+  overflow-wrap: anywhere;
+}
+
+.ucu-hero__lede {
+  color: var(--ucu-muted);
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  margin: 1rem 0 0;
+  max-width: 62ch;
+}
+
+.ucu-route-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1.8rem 0 2.2rem;
+}
+
+.ucu-route-card {
+  background: var(--ucu-paper-raised);
+  border: 1px solid var(--ucu-line);
+  border-top: 0.3rem solid var(--ucu-accent);
+  border-radius: 0.45rem;
+  color: var(--ucu-ink) !important;
+  display: block;
+  min-height: 10rem;
+  padding: 1.15rem;
+  text-decoration: none !important;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.ucu-route-card:nth-child(2) {
+  border-top-color: var(--ucu-highlight);
+}
+
+.ucu-route-card:hover {
+  border-color: var(--ucu-accent);
+  box-shadow: 0 0.75rem 2rem rgb(18 33 47 / 12%);
+  transform: translateY(-0.2rem);
+}
+
+.ucu-route-card__step {
+  color: var(--ucu-muted);
+  font-size: 0.7rem;
+  font-weight: 760;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ucu-route-card strong {
+  display: block;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1.12;
+  margin: 0.45rem 0;
+}
+
+.ucu-route-card h3 {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  margin: 0.45rem 0;
+}
+
+.ucu-route-card h3 a {
+  color: var(--ucu-accent-strong);
+}
+
+.ucu-route-card p {
+  color: var(--ucu-muted);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.ucu-practice-brief {
+  background: var(--ucu-paper-raised);
+  border: 1px solid var(--ucu-line);
+  border-left: 0.38rem solid var(--ucu-accent);
+  border-radius: 0.4rem;
+  box-shadow: 0 0.8rem 2rem rgb(18 33 47 / 8%);
+  margin: 0 0 2rem;
+  padding: 1.2rem 1.35rem;
+}
+
+.ucu-practice-brief__title,
+.ucu-practice-brief__deliverables-title {
+  margin: 0;
+}
+
+.ucu-practice-brief__title {
+  color: var(--ucu-ink);
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.ucu-practice-brief__deliverables-title {
+  font-weight: 750;
+}
+
+.ucu-practice-brief__facts {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  margin: 1rem 0;
+}
+
+.ucu-practice-brief__facts div {
+  background: color-mix(in srgb, var(--ucu-accent-soft) 62%, transparent);
+  border-radius: 0.35rem;
+  padding: 0.65rem 0.75rem;
+}
+
+.ucu-practice-brief dt {
+  color: var(--ucu-muted);
+  font-size: 0.68rem;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ucu-practice-brief dd {
+  font-weight: 680;
+  margin: 0.15rem 0 0;
+}
+
+.ucu-practice-brief__deliverables {
+  border-top: 1px solid var(--ucu-line);
+  padding-top: 0.85rem;
+}
+
+.ucu-practice-brief__deliverables h3 {
+  font-family: var(--md-text-font);
+  font-size: 0.82rem;
+  font-weight: 760;
+}
+
+.ucu-practice-brief__portfolio {
+  margin-bottom: 0;
+}
+
+.ucu-badge,
+.ucu-status-badge {
+  background: var(--ucu-accent-soft);
+  border: 1px solid color-mix(in srgb, var(--ucu-accent) 52%, var(--ucu-line));
+  border-radius: 999px;
+  color: var(--ucu-accent-strong);
+  display: inline-flex;
+  font-size: 0.72rem;
+  font-weight: 760;
+  line-height: 1;
+  padding: 0.35rem 0.55rem;
+}
+
+[data-md-color-scheme="slate"] .ucu-badge,
+[data-md-color-scheme="slate"] .ucu-status-badge {
+  color: #d7fffa;
+}
+
+.ucu-progress-dashboard {
+  background: var(--ucu-paper-raised);
+  border: 1px solid var(--ucu-line);
+  border-radius: 0.55rem;
+  box-shadow: var(--ucu-shadow);
+  margin: 1rem 0 1.6rem;
+  padding: 1.2rem;
+}
+
+.ucu-progress-dashboard h3 {
+  margin: 0;
+}
+
+.ucu-progress-dashboard__summary {
+  color: var(--ucu-muted);
+  margin: 0.25rem 0 1rem;
+}
+
+.ucu-progress-dashboard__grid {
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.ucu-progress-stat {
+  border-left: 0.25rem solid var(--ucu-line);
+  padding: 0.3rem 0.65rem;
+}
+
+.ucu-progress-stat strong {
+  display: block;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1.65rem;
+}
+
+.ucu-progress-stat--minimo { border-color: var(--ucu-highlight); }
+.ucu-progress-stat--defendible { border-color: var(--ucu-accent); }
+.ucu-progress-stat--revisado { border-color: #24743a; }
+
+.ucu-progress-dashboard progress {
+  accent-color: var(--ucu-accent);
+  display: block;
+  height: 0.85rem;
+  margin: 1rem 0 0.3rem;
+  width: 100%;
+}
+
+.ucu-progress-source td:last-child {
+  white-space: nowrap;
+}
+
+.ucu-progress-source td[data-ucu-status="mínimo"] { background: var(--ucu-highlight-soft); }
+.ucu-progress-source td[data-ucu-status="defendible"] { background: var(--ucu-accent-soft); }
+.ucu-progress-source td[data-ucu-status="revisado"] { background: color-mix(in srgb, #69b57d 28%, transparent); }
+
+.ucu-boundary-note {
+  background: color-mix(in srgb, var(--ucu-highlight-soft) 75%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ucu-highlight) 45%, var(--ucu-line));
+  border-radius: 0.35rem;
+  padding: 0.85rem 1rem;
+}
+
+@media (max-width: 760px) {
+  .ucu-route-grid,
+  .ucu-progress-dashboard__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ucu-route-card {
+    min-height: auto;
+  }
+
+  .ucu-hero {
+    border-radius: 0.45rem 1.3rem 0.45rem 0.45rem;
+    overflow: hidden;
+    padding: 1.25rem;
+  }
+
+  .ucu-hero__title {
+    font-size: clamp(1.9rem, 10vw, 2.65rem);
+    max-width: 100%;
+  }
+
+  .md-typeset table:not([class]) {
+    font-size: 0.72rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .ucu-route-card,
+  .ucu-hero,
+  .ucu-practice-brief,
+  .ucu-progress-dashboard {
+    border-width: 2px;
+  }
+}

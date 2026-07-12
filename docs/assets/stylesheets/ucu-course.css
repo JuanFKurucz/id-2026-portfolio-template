@@ -1,0 +1,4 @@
+:root {
+  /* ID hereda los acentos verdes compartidos y especializa el resaltado. */
+  --ucu-highlight: #a85f08;
+}
