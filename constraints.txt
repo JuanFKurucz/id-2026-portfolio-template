@@ -1,0 +1,10 @@
+# Tested course-platform dependency set. Update intentionally through a PR.
+mkdocs==1.6.1
+mkdocs-material==9.7.6
+mkdocs-awesome-pages-plugin==2.10.1
+mkdocs-git-revision-date-localized-plugin==1.5.3
+mkdocs-glightbox==0.5.2
+PyYAML==6.0.3
+ghp-import==2.1.0
+openpyxl==3.1.5
+python-pptx==1.0.2
