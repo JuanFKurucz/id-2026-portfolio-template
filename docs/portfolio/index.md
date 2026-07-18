@@ -14,6 +14,8 @@ Esta sección reúne las entradas que vas a defender durante el curso. Cada entr
 3. Enlazá notebooks, scripts, capturas o resultados con rutas relativas.
 4. Agregá declaración AI-safe cuando corresponda.
 
+El progreso no se mide por extensión. Pasá a `Mínimo` cuando exista una comparación inspeccionable, a `Defendible` cuando puedas sostenerla sin IA y a `Revisado` únicamente después de registrar una devolución, un cambio comprobado y el límite que permanece.
+
 ## Entradas iniciales
 
 - [Mapa de evidencias](mapa-evidencias.md): checklist de 16 clases, parciales, ranking interno y defensa final.

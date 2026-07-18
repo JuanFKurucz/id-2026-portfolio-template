@@ -52,6 +52,13 @@ SECRET_PATTERNS = {
 }
 LINK_RE = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
 PLACEHOLDER_RE = re.compile(r"(?i)(?:\bTODO\b|\[completar\]|<propósito>|<herramienta>|reemplazá este texto)")
+REVIEW_HEADING_RE = re.compile(r"(?mi)^## (?:Revisión|Feedback y revisión)\s*$")
+REVIEW_FIELDS = {
+    "devolución interpretada": re.compile(r"(?mi)^\s*[-*]?\s*(?:\*\*)?Devolución interpretada:(?:\*\*)?\s*(.+)$"),
+    "cambio realizado": re.compile(r"(?mi)^\s*[-*]?\s*(?:\*\*)?Cambio realizado:(?:\*\*)?\s*(.+)$"),
+    "comprobación": re.compile(r"(?mi)^\s*[-*]?\s*(?:\*\*)?Comprobación:(?:\*\*)?\s*(.+)$"),
+    "límite restante": re.compile(r"(?mi)^\s*[-*]?\s*(?:\*\*)?Límite restante:(?:\*\*)?\s*(.+)$"),
+}
 
 
 @dataclass(frozen=True)
@@ -238,8 +245,8 @@ def parse_progress_map(path: Path) -> tuple[list[ProgressRow], list[Issue]]:
     return rows, issues
 
 
-def validate_entry(path: Path) -> list[Issue]:
-    """Validate the sections and placeholders of one started evidence entry."""
+def validate_entry(path: Path, status: str | None = None) -> list[Issue]:
+    """Validate the sections, state-specific evidence and placeholders of one entry."""
     if not path.exists():
         return [Issue("error", f"La evidencia marcada no existe: {path.as_posix()}")]
     text = path.read_text(encoding="utf-8")
@@ -247,6 +254,29 @@ def validate_entry(path: Path) -> list[Issue]:
     for label, alternatives in REQUIRED_SECTIONS.items():
         if not any(section in text for section in alternatives):
             issues.append(Issue("error", f"{path.name} no contiene la sección {label!r}"))
+    if status == "Revisado":
+        heading = REVIEW_HEADING_RE.search(text)
+        if not heading:
+            issues.append(
+                Issue(
+                    "error",
+                    f"{path.name} está Revisado pero no contiene la sección 'revisión'",
+                )
+            )
+        else:
+            section_start = heading.end()
+            next_heading = re.search(r"(?m)^##\s+", text[section_start:])
+            section_end = section_start + next_heading.start() if next_heading else len(text)
+            review_text = text[section_start:section_end]
+            for label, pattern in REVIEW_FIELDS.items():
+                match = pattern.search(review_text)
+                if not match or PLACEHOLDER_RE.search(match.group(1)):
+                    issues.append(
+                        Issue(
+                            "error",
+                            f"{path.name} tiene el campo de revisión {label!r} vacío o sin completar",
+                        )
+                    )
     if PLACEHOLDER_RE.search(text):
         issues.append(Issue("warning", f"{path.name} todavía contiene texto de plantilla"))
     return issues
@@ -302,7 +332,7 @@ def validate(root: Path) -> list[Issue]:
         if row.status not in ALLOWED_STATUSES or row.status == "Pendiente":
             continue
         suggested = row.suggested_file.replace("\\", "/").removeprefix("docs/")
-        issues.extend(validate_entry(root / "docs" / suggested))
+        issues.extend(validate_entry(root / "docs" / suggested, row.status))
 
     issues.extend(validate_local_links(root))
     issues.extend(scan_secrets(root))

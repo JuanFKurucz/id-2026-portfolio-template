@@ -48,6 +48,8 @@ Esta guía es para el repo de portafolio personal. El sitio de tareas se lee; es
 
 Si la práctica no usa MLflow ni otra herramienta de tracking, en `Run o traza` registrá el commit, comando, build o check que permite ubicar la ejecución. No inventes un Run ID.
 
+Para usar `Revisado`, agregá a la entrada la devolución interpretada, el cambio realizado, la comprobación y el límite restante. Parafraseá el feedback útil: no copies comentarios privados al sitio público.
+
 ## No mezcles
 
 - consignas del sitio de tareas como si fueran evidencia propia;

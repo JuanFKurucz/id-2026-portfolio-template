@@ -75,6 +75,15 @@ Respondé en 3-5 líneas:
 - Qué pregunta sorpresa podrían hacerte.
 - Qué cambiaría si el dato, la métrica o el requisito cambia.
 
+## Revisión
+
+Completá esta sección solo cuando cambies la fila a `Revisado`. Parafraseá la devolución útil; no publiques comentarios docentes privados ni datos de otras personas.
+
+- **Devolución interpretada:** [Completar] Qué observación cambió tu lectura del trabajo.
+- **Cambio realizado:** [Completar] Qué modificaste respecto de la versión anterior.
+- **Comprobación:** [Completar] Qué prueba, comparación o artefacto demuestra la mejora.
+- **Límite restante:** [Completar] Qué sigue sin resolverse o no puede afirmarse todavía.
+
 ## Referencias
 
 Listá solo fuentes usadas realmente. Si usaste documentación, paper, post o notebook externo, explicá qué idea tomaste y cómo la verificaste.

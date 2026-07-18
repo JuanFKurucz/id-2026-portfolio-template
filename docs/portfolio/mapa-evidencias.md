@@ -45,6 +45,13 @@ El resumen visual aparece cuando JavaScript está disponible. La tabla siguiente
 
 </div>
 
+## Estados
+
+- `Pendiente`: todavía no existe un resultado verificable.
+- `Mínimo`: existe una evidencia localizable, una comparación y una forma de inspeccionarla.
+- `Defendible`: podés explicar sin IA la decisión propia, el límite y una variación.
+- `Revisado`: incorporaste una devolución, registraste el cambio y comprobaste su efecto. No alcanza con cambiar la etiqueta.
+
 ## Parciales y defensa final
 
 - Parcial 1: guardá una reflexión posterior, sin copiar el núcleo A0 reservado.
