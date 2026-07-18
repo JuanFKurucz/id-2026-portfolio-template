@@ -5,7 +5,7 @@ date: 2026-07-01
 
 # Índice del portafolio
 
-Esta sección reúne las entradas que vas a defender durante el curso. Cada entrada debe mostrar una evidencia concreta, una decisión propia, un límite y una forma de reproducir o inspeccionar el resultado.
+Esta sección reúne las entradas que vas a defender durante el curso. Cada entrada debe mostrar una evidencia concreta, su configuración, una comprobación localizable, una comparación, una decisión propia, un límite y una forma de reproducir o inspeccionar el resultado.
 
 ## Cómo crear una entrada nueva
 

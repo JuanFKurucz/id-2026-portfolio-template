@@ -7,12 +7,26 @@ date: 2026-07-01
 
 Copiá esta página para cada evidencia importante. La entrada no tiene que ser larga; tiene que ser defendible.
 
+> [Completar] Reemplazá esta línea y las ayudas de cada sección por evidencia propia antes de marcar la entrada como `Mínimo`.
+
 ## Objetivo
 
 - **Clase o práctica:** indicá la consigna o clase relacionada.
 - **Objetivo:** qué querías demostrar.
 - **Resultado visible:** archivo, gráfico, métrica, contrato, check, notebook, log o captura.
 - **Estado:** ruta mínima completa, ruta completa parcial o extensión.
+
+## Configuración
+
+Registrá dataset o fixture, versión relevante, parámetros que cambian el resultado y presupuesto de tiempo o cómputo. Evitá copiar toda la configuración si no ayuda a repetir la decisión.
+
+## Run o traza
+
+Indicá el Run ID, commit, comando, build o check que ubica esta ejecución. Si no corresponde usar tracking, escribí `No aplica MLflow` y conservá la comprobación local equivalente; no inventes identificadores.
+
+## Resultado y comparación
+
+Contrastá el resultado con un baseline, control, contrato esperado o corrida anterior. Explicá qué diferencia observaste y qué permite afirmar.
 
 ## Evidencia
 
@@ -41,6 +55,10 @@ Si no hay script, indicá el notebook, dataset permitido y pasos mínimos. Si al
 - **Alternativa descartada:** qué no hiciste y por qué.
 - **Límite:** dato faltante, métrica débil, costo, sesgo, privacidad, hardware o dependencia externa.
 - **Riesgo:** qué podría salir mal si se usa este resultado fuera de clase.
+
+## Siguiente experimento
+
+Definí una sola variación y qué resultado confirmaría, debilitaría o cambiaría la decisión actual.
 
 ## Uso de IA
 

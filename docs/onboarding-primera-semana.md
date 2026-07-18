@@ -35,13 +35,18 @@ Esta guía es para el repo de portafolio personal. El sitio de tareas se lee; es
 
 ```text
 ## Objetivo
+## Configuración
+## Run o traza
+## Resultado y comparación
 ## Evidencia
 ## Reproducibilidad
-## Decisión técnica
-## Límite o riesgo
+## Decisiones y límites
+## Siguiente experimento
 ## Uso de IA
 ## Microdefensa
 ```
+
+Si la práctica no usa MLflow ni otra herramienta de tracking, en `Run o traza` registrá el commit, comando, build o check que permite ubicar la ejecución. No inventes un Run ID.
 
 ## No mezcles
 

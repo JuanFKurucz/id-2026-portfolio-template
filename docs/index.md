@@ -44,7 +44,7 @@ Elegí evidencia fuerte, reproducila y ensayá una variación.
 
 ## Contrato de una entrada defendible
 
-Toda entrada importante incluye objetivo, evidencia concreta, reproducibilidad, decisión técnica, límite o riesgo, uso de IA y microdefensa. La [plantilla](portfolio/plantilla.md) ya contiene esas secciones.
+Toda entrada importante incluye objetivo, configuración, run o comprobación, resultado comparado, evidencia concreta, reproducibilidad, decisión técnica, límite o riesgo, siguiente prueba, uso de IA y microdefensa. La [plantilla](portfolio/plantilla.md) ya contiene esas secciones.
 
 ## Cómo se evalúa este portafolio
 

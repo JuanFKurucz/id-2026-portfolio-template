@@ -14,7 +14,7 @@ Este repositorio sí se edita: es la base del portafolio personal para **Ingenie
 
 1. Copiá `docs/portfolio/plantilla.md`.
 2. Guardá la nueva entrada en `docs/portfolio/` con nombre ordenado, por ejemplo `02-eda.md`.
-3. Incluí objetivo, evidencia, reproducibilidad, decisiones, límites, uso de IA y microdefensa.
+3. Incluí objetivo, configuración, run o comprobación, resultado comparado, evidencia, reproducibilidad, decisión, límite, siguiente prueba, uso de IA y microdefensa.
 4. Enlazá notebooks, capturas, logs, contratos o resultados con rutas relativas.
 5. Entregá en WebAsignatura solo el link o archivo pedido por el docente.
 

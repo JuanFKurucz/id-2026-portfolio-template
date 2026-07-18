@@ -19,20 +19,25 @@
         <div><dt>IA máxima</dt><dd><span class="ucu-badge">{{ page.meta.ai_max_level }}</span></dd></div>
       {% endif %}
     </dl>
-    {% if page.meta.deliverables %}
-      <div class="ucu-practice-brief__deliverables">
-        <p class="ucu-practice-brief__deliverables-title">Entregables</p>
-        {% if page.meta.deliverables is string %}
-          <p>{{ page.meta.deliverables }}</p>
-        {% else %}
-          <ul>
-            {% for deliverable in page.meta.deliverables %}<li>{{ deliverable }}</li>{% endfor %}
-          </ul>
+    {% if page.meta.deliverables or page.meta.portfolio_entry %}
+      <details class="ucu-practice-brief__details">
+        <summary>Entrega y portafolio</summary>
+        {% if page.meta.deliverables %}
+          <div class="ucu-practice-brief__deliverables">
+            <p class="ucu-practice-brief__deliverables-title">Entregables</p>
+            {% if page.meta.deliverables is string %}
+              <p>{{ page.meta.deliverables }}</p>
+            {% else %}
+              <ul>
+                {% for deliverable in page.meta.deliverables %}<li>{{ deliverable }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </div>
         {% endif %}
-      </div>
-    {% endif %}
-    {% if page.meta.portfolio_entry %}
-      <p class="ucu-practice-brief__portfolio"><strong>Entrada sugerida:</strong> <code>{{ page.meta.portfolio_entry }}</code></p>
+        {% if page.meta.portfolio_entry %}
+          <p class="ucu-practice-brief__portfolio"><strong>Entrada sugerida:</strong> <code>{{ page.meta.portfolio_entry }}</code></p>
+        {% endif %}
+      </details>
     {% endif %}
   </section>
 {% endif %}

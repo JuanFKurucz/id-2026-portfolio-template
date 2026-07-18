@@ -17,6 +17,10 @@ from urllib.parse import unquote
 
 
 ALLOWED_STATUSES = ("Pendiente", "Mínimo", "Defendible", "Revisado")
+CLASS_IDENTIFIERS = tuple(str(number) for number in range(1, 17))
+IA_CLASS_IDENTIFIERS = tuple(str(number) for number in range(1, 15))
+UNIT_IDENTIFIERS = tuple(f"UT{number}" for number in range(1, 6))
+CASE_IDENTIFIERS = ("CASO1", "CASO2")
 ESSENTIAL_FILES = (
     "mkdocs.yml",
     "docs/index.md",
@@ -27,10 +31,14 @@ ESSENTIAL_FILES = (
     "docs/portfolio/plantilla.md",
 )
 REQUIRED_SECTIONS = {
-    "objetivo": ("## Objetivo",),
+    "objetivo y pregunta": ("## Objetivo", "## Pregunta"),
+    "configuración": ("## Configuración",),
+    "run o traza": ("## Run o traza", "## Run o trace"),
+    "resultado y comparación": ("## Resultado y comparación", "## Resultado probado"),
     "evidencia": ("## Evidencia",),
     "reproducibilidad": ("## Reproducibilidad",),
-    "decisiones y límites": ("## Decisiones y límites", "## Decisión técnica", "## Decisiones"),
+    "decisión y límite": ("## Decisión y límite", "## Decisiones y límites", "## Decisión técnica", "## Decisiones"),
+    "siguiente experimento": ("## Siguiente experimento",),
     "uso de IA": ("## Uso de IA",),
     "microdefensa": ("## Microdefensa",),
 }
@@ -54,7 +62,7 @@ class Issue:
 
 @dataclass(frozen=True)
 class ProgressRow:
-    number: int
+    identifier: str
     suggested_file: str
     status: str
 
@@ -65,31 +73,168 @@ def _normalise_status(value: str) -> str | None:
     return next((status for status in ALLOWED_STATUSES if status.casefold() == compact), None)
 
 
+def _frontmatter(text: str) -> str:
+    """Return the leading YAML frontmatter without requiring a YAML dependency."""
+    lines = text.splitlines()
+    if not lines or lines[0].strip() != "---":
+        return ""
+    for index, line in enumerate(lines[1:], start=1):
+        if line.strip() == "---":
+            return "\n".join(lines[1:index])
+    return ""
+
+
+def _frontmatter_scalar(frontmatter: str, key: str) -> str | None:
+    match = re.search(
+        rf"(?mi)^{re.escape(key)}\s*:\s*([^\n#]+?)\s*(?:#.*)?$",
+        frontmatter,
+    )
+    if not match:
+        return None
+    return match.group(1).strip().strip("'\"")
+
+
+def _frontmatter_list(frontmatter: str, key: str) -> tuple[str, ...]:
+    """Read a small inline or block YAML list used by the progress contract."""
+    lines = frontmatter.splitlines()
+    for index, line in enumerate(lines):
+        match = re.match(rf"^{re.escape(key)}\s*:\s*(.*?)\s*$", line, flags=re.IGNORECASE)
+        if not match:
+            continue
+        inline = match.group(1).strip()
+        if inline:
+            if inline.startswith("[") and inline.endswith("]"):
+                inline = inline[1:-1]
+            return tuple(item.strip().strip("'\"") for item in inline.split(",") if item.strip())
+        values: list[str] = []
+        for candidate in lines[index + 1 :]:
+            item = re.match(r"^\s+-\s+(.+?)\s*$", candidate)
+            if item:
+                values.append(item.group(1).strip().strip("'\""))
+                continue
+            if candidate.strip() and not candidate[:1].isspace():
+                break
+        return tuple(values)
+    return ()
+
+
+def _progress_contract(text: str) -> tuple[tuple[str, ...], str, list[Issue]]:
+    """Resolve class, unit, two-case or combined progress maps."""
+    frontmatter = _frontmatter(text)
+    raw_mode = _frontmatter_scalar(frontmatter, "progress_mode")
+    mode = (raw_mode or "classes").casefold()
+    if mode == "classes":
+        return CLASS_IDENTIFIERS, "clases", []
+    if mode == "cases":
+        declared = tuple(
+            value.upper().replace(" ", "") for value in _frontmatter_list(frontmatter, "expected_cases")
+        )
+        issues: list[Issue] = []
+        if not declared:
+            issues.append(Issue("error", "progress_mode: cases requiere expected_cases: [CASO1, CASO2]"))
+        elif declared != CASE_IDENTIFIERS:
+            issues.append(Issue("error", "expected_cases debe declarar exactamente: CASO1, CASO2"))
+        return CASE_IDENTIFIERS, "casos", issues
+    if mode == "classes_and_cases":
+        declared_classes = tuple(_frontmatter_list(frontmatter, "expected_classes"))
+        declared_cases = tuple(
+            value.upper().replace(" ", "")
+            for value in _frontmatter_list(frontmatter, "expected_cases")
+        )
+        issues: list[Issue] = []
+        if declared_classes != IA_CLASS_IDENTIFIERS:
+            issues.append(
+                Issue(
+                    "error",
+                    "progress_mode: classes_and_cases requiere expected_classes exactamente del 1 al 14",
+                )
+            )
+        if declared_cases != CASE_IDENTIFIERS:
+            issues.append(
+                Issue(
+                    "error",
+                    "progress_mode: classes_and_cases requiere expected_cases: [CASO1, CASO2]",
+                )
+            )
+        return IA_CLASS_IDENTIFIERS + CASE_IDENTIFIERS, "clases y casos", issues
+    if mode != "units":
+        return CLASS_IDENTIFIERS, "clases", [Issue("error", f"progress_mode inválido: {raw_mode!r}")]
+
+    declared = tuple(value.upper().replace(" ", "") for value in _frontmatter_list(frontmatter, "expected_units"))
+    issues: list[Issue] = []
+    if not declared:
+        issues.append(Issue("error", "progress_mode: units requiere expected_units: [UT1, UT2, UT3, UT4, UT5]"))
+    elif declared != UNIT_IDENTIFIERS:
+        issues.append(
+            Issue(
+                "error",
+                "expected_units debe declarar exactamente: UT1, UT2, UT3, UT4, UT5",
+            )
+        )
+    return UNIT_IDENTIFIERS, "unidades", issues
+
+
 def parse_progress_map(path: Path) -> tuple[list[ProgressRow], list[Issue]]:
     """Parse the evidence map and report structural or status errors."""
     issues: list[Issue] = []
     rows: list[ProgressRow] = []
     if not path.exists():
         return rows, [Issue("error", f"Falta {path.as_posix()}")]
-    for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+    text = path.read_text(encoding="utf-8")
+    expected, label, contract_issues = _progress_contract(text)
+    issues.extend(contract_issues)
+    unit_mode = expected == UNIT_IDENTIFIERS
+    case_mode = expected == CASE_IDENTIFIERS
+    combined_mode = any(identifier.startswith("CASO") for identifier in expected) and any(
+        identifier.isdigit() for identifier in expected
+    )
+    for line_number, line in enumerate(text.splitlines(), start=1):
         if not line.lstrip().startswith("|"):
             continue
         cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
-        if not cells or not cells[0].isdigit() or len(cells) < 3:
+        if not cells or len(cells) < 3:
             continue
+        raw_identifier = cells[0].strip("`")
+        if unit_mode:
+            if not re.fullmatch(r"(?i)UT\s*\d+", raw_identifier):
+                continue
+            identifier = raw_identifier.upper().replace(" ", "")
+        elif case_mode:
+            if not re.fullmatch(r"(?i)CASO\s*\d+", raw_identifier):
+                continue
+            identifier = raw_identifier.upper().replace(" ", "")
+        elif combined_mode:
+            if raw_identifier.isdigit():
+                identifier = str(int(raw_identifier))
+            elif re.fullmatch(r"(?i)CASO\s*\d+", raw_identifier):
+                identifier = raw_identifier.upper().replace(" ", "")
+            else:
+                continue
+        else:
+            if not raw_identifier.isdigit():
+                continue
+            identifier = str(int(raw_identifier))
         status = _normalise_status(cells[-1])
         if status is None:
             issues.append(Issue("error", f"Estado inválido en {path.name}:{line_number}: {cells[-1]!r}"))
             status = cells[-1]
         suggested = cells[-2].strip("`")
-        rows.append(ProgressRow(int(cells[0]), suggested, status))
-    found = {row.number for row in rows}
-    missing = sorted(set(range(1, 17)) - found)
+        rows.append(ProgressRow(identifier, suggested, status))
+    found = {row.identifier for row in rows}
+    missing = [identifier for identifier in expected if identifier not in found]
     if missing:
-        issues.append(Issue("error", f"El mapa no contiene las clases: {', '.join(map(str, missing))}"))
-    duplicates = sorted(number for number in found if sum(row.number == number for row in rows) > 1)
+        issues.append(Issue("error", f"El mapa no contiene las {label}: {', '.join(missing)}"))
+    duplicates = [identifier for identifier in expected if sum(row.identifier == identifier for row in rows) > 1]
     if duplicates:
-        issues.append(Issue("error", f"El mapa repite las clases: {', '.join(map(str, duplicates))}"))
+        issues.append(Issue("error", f"El mapa repite las {label}: {', '.join(duplicates)}"))
+    unexpected = sorted(found.difference(expected), key=lambda value: (not value.isdigit(), value))
+    if unexpected:
+        issues.append(
+            Issue(
+                "error",
+                f"El mapa contiene identificadores no permitidos para {label}: {', '.join(unexpected)}",
+            )
+        )
     return rows, issues
 
 

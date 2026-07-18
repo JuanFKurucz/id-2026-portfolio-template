@@ -25,22 +25,22 @@ El resumen visual aparece cuando JavaScript está disponible. La tabla siguiente
 
 | # | Foco en lenguaje simple | Evidencia mínima | Tipo | Archivo sugerido | Estado |
 |---|---|---|---|---|---|
-| 1 | Entender cómo se trabaja en el curso y dejar el portafolio listo para mostrar evidencia. | link o captura del portafolio; primer commit o cambio visible | Clase + entrada de portafolio | `portfolio/01-primera-entrada.md` | Pendiente |
-| 2 | Mirar un dataset, describir columnas y detectar problemas simples antes de transformar datos. | notebook o reporte EDA; tabla de columnas | Clase + entrada de portafolio | `portfolio/02-eda.md` | Pendiente |
-| 3 | Compará Pandas con una herramienta local más escalable sin perder el criterio de validación. | comparación breve; código mínimo ejecutado | Clase + entrada de portafolio | `portfolio/03-procesamiento-escalable.md` | Pendiente |
-| 4 | Unir fuentes sin duplicar o perder registros y escribir el primer contrato de datos. | inventario; join validado | Clase + posible ronda de ranking interno | `portfolio/04-joins-contrato.md` | Pendiente |
-| 5 | Decidir qué hacer con nulos y outliers, y dejar checks que detecten problemas futuros. | pipeline de limpieza; checks antes/después | Clase + entrada de portafolio | `portfolio/05-calidad.md` | Pendiente |
-| 6 | Identificá leakage, datos sensibles y riesgos de fairness antes de confiar en resultados. | nota de riesgo; tabla de variables sensibles/leakage | Clase + posible ronda de ranking interno | `portfolio/06-riesgo-privacidad.md` | Pendiente |
-| 7 | Rendir el Parcial 1 A0 y crear variables con hipótesis y evidencia de versionado. | set de variables v1; hipótesis por variable | Parcial 1 + evidencia reflexiva | `portfolio/07-parcial-1-reflexion.md` | Pendiente |
-| 8 | Codificar variables categóricas sin filtrar información del target. | experimento de encoding; nota anti-leakage | Clase + posible ronda de ranking interno | `portfolio/08-encoding.md` | Pendiente |
-| 9 | Reducir variables o elegir atributos sin perder de vista interpretabilidad y evidencia. | gráfico PCA; reporte comparativo | Clase + entrada de portafolio | `portfolio/09-pca-seleccion.md` | Pendiente |
-| 10 | Crear variables temporales respetando el orden del tiempo y evitando mirar el futuro. | pipeline temporal; diagrama o tabla de ventanas | Clase + posible ronda de ranking interno | `portfolio/10-temporal.md` | Pendiente |
-| 11 | Usar ubicación o relaciones como datos sin perder el significado de coordenadas y nodos. | mapa o grafo; métrica explicada | Clase + entrada de portafolio | `portfolio/11-geoespacial-grafos.md` | Pendiente |
-| 12 | Convertir imagen, audio o datos semi-estructurados en una tabla de atributos defendibles. | tabla de atributos; ejemplo antes/después | Clase + posible ronda de ranking interno | `portfolio/12-datos-especiales.md` | Pendiente |
-| 13 | Rendir el Parcial 2 A0 y modelar transformaciones repetibles para datos confiables. | modelo dimensional o dbt mini; diagrama | Parcial 2 + evidencia reflexiva | `portfolio/13-parcial-2-reflexion.md` | Pendiente |
-| 14 | Automatizar un pipeline simple con dependencias, logs y reintentos razonables. | demo ETL/ELT; log de ejecución | Clase + posible ronda de ranking interno | `portfolio/14-orquestacion.md` | Pendiente |
-| 15 | Demostrar que un producto de datos es confiable con contrato, checks, linaje y observabilidad. | trust-stack demo; check fallido/corregido | Clase + entrada de portafolio | `portfolio/15-trust-stack.md` | Pendiente |
-| 16 | Defender el producto de datos y probá que podés reproducirlo y explicarlo sin IA. | portafolio final; paquete reproducible | Defensa final del portafolio | `portfolio/16-cierre-defensa.md` | Pendiente |
+| 1 | Arranque, rol de ingeniería de datos y portafolio reproducible. | Repo publicado, primera entrada y declaración de uso de IA. | Clase | `portfolio/01-primera-entrada.md` | Pendiente |
+| 2 | EDA con Python, SQL y Pandas. | Informe EDA con gráficos, supuestos y riesgos. | Clase | `portfolio/02-eda.md` | Pendiente |
+| 3 | Distribuciones y decisiones sobre outliers. | Perfil de distribuciones y decisión trazable sobre un outlier. | Clase | `portfolio/03-distribuciones-outliers.md` | Pendiente |
+| 4 | Ingesta multifuente, joins y contratos de datos. | Inventario de fuentes, controles de join y contrato v0. | Clase | `portfolio/04-multifuente.md` | Pendiente |
+| 5 | Missing data, outliers y validaciones ejecutables. | Pipeline de limpieza, casos rotos y validaciones. | Clase | `portfolio/05-calidad.md` | Pendiente |
+| 6 | Leakage, fairness, privacidad y uso responsable de IA. | Nota de riesgo con métrica, mitigación y datos excluidos de IA. | Clase | `portfolio/06-fairness.md` | Pendiente |
+| 7 | Parcial 1 y extensión opcional de ingeniería de atributos. | Registro del parcial; variables v1 sólo si realizás la extensión. | Parcial 1 + reflexión | `portfolio/07-parcial-1-reflexion.md` | Pendiente |
+| 8 | Encoding y validación anti-leakage. | Comparación de encoders y nota de leakage. | Clase | `portfolio/08-encoding.md` | Pendiente |
+| 9 | PCA, selección y comparación de modelos. | Comparación con baseline, análisis de error y compromiso elegido. | Clase | `portfolio/09-reduccion.md` | Pendiente |
+| 10 | Variables temporales y split cronológico. | Pipeline temporal, corte justificado y prueba anti-leakage. | Clase | `portfolio/10-temporal.md` | Pendiente |
+| 11 | Ventanas temporales y snapshot RFM. | Ventanas por evento, snapshot por cliente y comparación cronológica. | Clase | `portfolio/11-ventanas-rfm.md` | Pendiente |
+| 12 | Geodatos, CRS y predicados espaciales. | Mapa, política de frontera, cardinalidad y limitación. | Clase | `portfolio/12-geoespacial.md` | Pendiente |
+| 13 | Parcial 2 y extensión opcional de imagen. | Registro del Parcial 2; imagen sólo si se realiza como extensión separada. | Parcial 2 + reflexión | `portfolio/13-parcial-2-reflexion.md` | Pendiente |
+| 14 | Audio como dato y atributos reproducibles. | Configuración, espectrograma, tabla de atributos y control conocido. | Clase | `portfolio/14-audio.md` | Pendiente |
+| 15 | ETL/ELT, batch, streaming y DataOps. | Pipeline local, DAG, reportes y falla controlada. | Clase | `portfolio/15-etl-dataops.md` | Pendiente |
+| 16 | Defensa final del portafolio. | 2–3 evidencias, reproducción o fallback y variación individual sin IA. | Defensa final | `portfolio/16-cierre-defensa.md` | Pendiente |
 
 
 </div>
