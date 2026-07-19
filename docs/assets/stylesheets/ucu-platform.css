@@ -130,6 +130,10 @@ input {
 .ucu-hero,
 .ucu-route-grid,
 .ucu-route-card,
+.ucu-session-guide,
+.ucu-session-prep,
+.ucu-session-actions,
+.ucu-session-action,
 .ucu-practice-brief,
 .ucu-progress-dashboard,
 .ucu-boundary-note {
@@ -163,11 +167,20 @@ input {
 .ucu-hero__eyebrow,
 .ucu-practice-brief__eyebrow {
   color: var(--ucu-accent-strong);
+  display: flex;
+  flex-wrap: wrap;
   font-size: 0.72rem;
   font-weight: 760;
+  gap: 0.35rem;
   letter-spacing: 0.12em;
   margin: 0 0 0.6rem;
   text-transform: uppercase;
+}
+
+.ucu-practice-brief__eyebrow span + span::before {
+  color: var(--ucu-muted);
+  content: "·";
+  margin-right: 0.35rem;
 }
 
 [data-md-color-scheme="slate"] .ucu-hero__eyebrow,
@@ -260,6 +273,133 @@ input {
   overflow-wrap: break-word;
 }
 
+.md-typeset h1.ucu-class-title {
+  font-size: clamp(1.9rem, 4vw, 2.7rem);
+  line-height: 1.06;
+  margin-bottom: 0.75rem;
+  max-width: 26ch;
+}
+
+.ucu-session-meta {
+  color: var(--ucu-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.68rem;
+  gap: 0.35rem 0.85rem;
+  margin: 0 0 1rem;
+}
+
+.ucu-session-meta span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.ucu-session-meta strong {
+  color: var(--ucu-ink);
+  font-weight: 760;
+  margin-right: 0.18rem;
+}
+
+.ucu-session-guide {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--ucu-accent-soft) 68%, transparent), transparent 72%),
+    var(--ucu-paper-raised);
+  border: 1px solid var(--ucu-line);
+  border-left: 0.38rem solid var(--ucu-accent);
+  border-radius: 0.45rem;
+  box-shadow: 0 0.8rem 2rem rgb(18 33 47 / 8%);
+  line-height: 1.55;
+  margin: 0 0 2rem;
+  padding: 1.15rem 1.3rem 1.3rem;
+}
+
+.ucu-session-guide h2 {
+  margin: 0 0 0.7rem;
+}
+
+.ucu-session-guide > ul {
+  margin-bottom: 1rem;
+}
+
+.ucu-session-prep {
+  align-items: baseline;
+  color: var(--ucu-accent-readable) !important;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.45rem;
+  margin: 0.2rem 0 0;
+  padding: 0;
+  text-decoration-thickness: 0.08em;
+}
+
+.ucu-session-prep strong {
+  font-size: 0.72rem;
+}
+
+.ucu-session-prep strong::after {
+  content: "→";
+  margin-left: 0.35rem;
+}
+
+.ucu-session-prep span {
+  color: var(--ucu-muted);
+  font-size: 0.66rem;
+}
+
+.ucu-session-actions {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fit, minmax(6.8rem, 1fr));
+  margin-top: 1rem;
+}
+
+.ucu-session-action {
+  background: color-mix(in srgb, var(--ucu-paper-raised) 90%, var(--ucu-accent-soft));
+  border: 1px solid var(--ucu-line);
+  border-top: 0.24rem solid var(--ucu-accent);
+  border-radius: 0.35rem;
+  color: var(--ucu-ink) !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0.65rem;
+  text-decoration: none !important;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.ucu-session-action:nth-child(even) {
+  border-top-color: var(--ucu-highlight);
+}
+
+.ucu-session-action:hover {
+  border-color: var(--ucu-accent);
+  box-shadow: 0 0.55rem 1.4rem rgb(18 33 47 / 12%);
+  transform: translateY(-0.12rem);
+}
+
+.ucu-session-action__step {
+  color: var(--ucu-muted);
+  font-size: 0.62rem;
+  font-weight: 760;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.ucu-session-action strong {
+  font-family: var(--md-text-font);
+  font-size: 0.82rem;
+  line-height: 1.1;
+  margin: 0.35rem 0;
+  overflow-wrap: anywhere;
+}
+
+.ucu-session-action small {
+  color: var(--ucu-muted);
+  font-size: 0.62rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
 .ucu-practice-brief {
   background: var(--ucu-paper-raised);
   border: 1px solid var(--ucu-line);
@@ -290,7 +430,7 @@ input {
 .ucu-practice-brief__facts {
   display: grid;
   gap: 0.65rem;
-  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   margin: 1rem 0;
 }
 
@@ -311,6 +451,70 @@ input {
 .ucu-practice-brief dd {
   font-weight: 680;
   margin: 0.15rem 0 0;
+}
+
+.ucu-ai-mode {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.4rem;
+}
+
+.ucu-ai-mode::before {
+  background: #237a45;
+  border: 2px solid var(--ucu-paper-raised);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px color-mix(in srgb, #237a45 70%, var(--ucu-line));
+  content: "";
+  height: 0.58rem;
+  width: 0.58rem;
+}
+
+.ucu-ai-mode--foundation::before {
+  background: #b3261e;
+  box-shadow: 0 0 0 1px color-mix(in srgb, #b3261e 70%, var(--ucu-line));
+}
+
+.ucu-ai-mode--tutor::before {
+  background: #9a6700;
+  box-shadow: 0 0 0 1px color-mix(in srgb, #9a6700 70%, var(--ucu-line));
+}
+
+.ucu-reengagement {
+  border-block: 1px solid var(--ucu-line);
+  margin: 0.85rem 0;
+  padding: 0.65rem 0;
+}
+
+.ucu-reengagement summary {
+  color: var(--ucu-accent-readable);
+  cursor: pointer;
+  font-weight: 750;
+}
+
+.ucu-reengagement summary:focus-visible {
+  border-radius: 0.2rem;
+  outline: 0.18rem solid var(--ucu-focus);
+  outline-offset: 0.2rem;
+}
+
+.ucu-reengagement__steps {
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0.75rem 0 0;
+  padding-left: 1.4rem;
+}
+
+.ucu-reengagement__steps li {
+  margin: 0;
+  padding-left: 0.15rem;
+}
+
+.ucu-reengagement__checkpoint {
+  background: color-mix(in srgb, var(--ucu-accent-soft) 60%, transparent);
+  border-inline-start: 0.2rem solid var(--ucu-accent);
+  margin: 0.75rem 0 0;
+  padding: 0.65rem 0.8rem;
 }
 
 .ucu-practice-brief__deliverables {
@@ -368,6 +572,10 @@ input {
 
   .ucu-practice-brief__facts div {
     padding: 0.3rem 0.45rem;
+  }
+
+  .ucu-reengagement__steps {
+    grid-template-columns: 1fr;
   }
 
   .ucu-practice-brief dt {
@@ -480,6 +688,19 @@ input {
 
   .ucu-route-card {
     min-height: auto;
+  }
+
+  .ucu-session-guide {
+    padding: 1rem;
+  }
+
+  .ucu-session-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ucu-session-action {
+    min-height: 0;
+    padding: 0.65rem;
   }
 
   .ucu-hero {
@@ -605,6 +826,8 @@ input {
 @media (prefers-contrast: more) {
   .ucu-route-card,
   .ucu-hero,
+  .ucu-session-guide,
+  .ucu-session-action,
   .ucu-practice-brief,
   .ucu-progress-dashboard {
     border-width: 2px;
