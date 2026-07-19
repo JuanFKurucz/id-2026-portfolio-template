@@ -1,24 +1,46 @@
-{% if page and page.meta and (page.meta.course or page.meta.unit or page.meta.session or page.meta.ai_max_level or page.meta.estimated_minutes or page.meta.deliverables or page.meta.portfolio_entry) %}
+{% if page and page.meta and (page.meta.course or page.meta.unit or page.meta.session or page.meta.ai_max_level or page.meta.support_level or page.meta.estimated_minutes or page.meta.deliverables or page.meta.portfolio_entry) %}
   <section class="ucu-practice-brief" aria-labelledby="ucu-practice-brief-title">
-    <div class="ucu-practice-brief__eyebrow">Guía operativa</div>
+    <div class="ucu-practice-brief__eyebrow">
+      <span>Guía operativa</span>
+      {% if page.meta.course %}<span>{{ page.meta.course | upper }}</span>{% endif %}
+      {% if page.meta.unit %}<span>{{ page.meta.unit }}</span>{% endif %}
+      {% if page.meta.session %}<span>Clase {{ page.meta.session }}</span>{% endif %}
+    </div>
     <p id="ucu-practice-brief-title" class="ucu-practice-brief__title">Ficha de práctica</p>
-    <dl class="ucu-practice-brief__facts">
-      {% if page.meta.course %}
-        <div><dt>Curso</dt><dd>{{ page.meta.course }}</dd></div>
-      {% endif %}
-      {% if page.meta.unit %}
-        <div><dt>Unidad</dt><dd>{{ page.meta.unit }}</dd></div>
-      {% endif %}
-      {% if page.meta.session %}
-        <div><dt>Clase</dt><dd>{{ page.meta.session }}</dd></div>
-      {% endif %}
+    {% if page.meta.estimated_minutes or page.meta.ai_max_level or page.meta.support_level %}
+      <dl class="ucu-practice-brief__facts">
       {% if page.meta.estimated_minutes %}
         <div><dt>Tiempo estimado</dt><dd>{{ page.meta.estimated_minutes }} min</dd></div>
       {% endif %}
       {% if page.meta.ai_max_level %}
-        <div><dt>IA máxima</dt><dd><span class="ucu-badge">{{ page.meta.ai_max_level }}</span></dd></div>
+        <div>
+          <dt>Uso de IA</dt>
+          <dd>
+            {% if page.meta.ai_max_level == "A0" %}
+              <span class="ucu-ai-mode ucu-ai-mode--foundation">Fundación · A0</span>
+            {% elif page.meta.ai_max_level == "A1" %}
+              <span class="ucu-ai-mode ucu-ai-mode--tutor">Tutor · A1</span>
+            {% else %}
+              <span class="ucu-ai-mode ucu-ai-mode--engineering">Ingeniería · {{ page.meta.ai_max_level }}</span>
+            {% endif %}
+          </dd>
+        </div>
       {% endif %}
-    </dl>
+      {% if page.meta.support_level %}
+        <div><dt>Nivel de apoyo</dt><dd>{% if page.meta.support_level == "first" %}Primer encuentro{% elif page.meta.support_level == "transfer" %}Transferencia{% elif page.meta.support_level == "integration" %}Integración{% else %}{{ page.meta.support_level }}{% endif %}</dd></div>
+      {% endif %}
+      </dl>
+    {% endif %}
+    <details class="ucu-reengagement">
+      <summary>Recorrido para volver a entrar</summary>
+      <ol class="ucu-reengagement__steps">
+        <li><strong>Predecí.</strong> Anotá qué esperás antes de ejecutar o consultar IA.</li>
+        <li><strong>Probá e investigá.</strong> Corré el punto de partida; mirá datos, errores y trazas.</li>
+        <li><strong>Modificá y construí.</strong> Elegí una decisión y conectá las piezas.</li>
+        <li><strong>Explicá y probá.</strong> Contrastá los controles y cerrá la microdefensa con confianza de 1 a 4.</li>
+      </ol>
+      <p class="ucu-reengagement__checkpoint"><strong>Si pausás:</strong> dejá una nota breve con el último control que pasó, el bloqueo actual y la siguiente decisión. Es un punto de retorno, no otra entrega.</p>
+    </details>
     {% if page.meta.deliverables or page.meta.portfolio_entry %}
       <details class="ucu-practice-brief__details">
         <summary>Entrega y portafolio</summary>
