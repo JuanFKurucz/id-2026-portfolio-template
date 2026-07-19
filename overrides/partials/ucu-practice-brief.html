@@ -17,11 +17,15 @@
           <dt>Uso de IA</dt>
           <dd>
             {% if page.meta.ai_max_level == "A0" %}
-              <span class="ucu-ai-mode ucu-ai-mode--foundation">Fundación · A0</span>
+              <span class="ucu-ai-mode ucu-ai-mode--foundation">Fundación · A0 · sin IA</span>
             {% elif page.meta.ai_max_level == "A1" %}
-              <span class="ucu-ai-mode ucu-ai-mode--tutor">Tutor · A1</span>
+              <span class="ucu-ai-mode ucu-ai-mode--tutor">Tutor · A1 · pistas, no solución</span>
+            {% elif page.meta.ai_max_level == "A2" %}
+              <span class="ucu-ai-mode ucu-ai-mode--engineering">Ingeniería · A2 · copiloto verificado</span>
+            {% elif page.meta.ai_max_level == "A3" %}
+              <span class="ucu-ai-mode ucu-ai-mode--engineering">Ingeniería · A3 · co-diseño defendido</span>
             {% else %}
-              <span class="ucu-ai-mode ucu-ai-mode--engineering">Ingeniería · {{ page.meta.ai_max_level }}</span>
+              <span class="ucu-ai-mode ucu-ai-mode--engineering">Ingeniería · A4 · automatización supervisada</span>
             {% endif %}
           </dd>
         </div>
